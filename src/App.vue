@@ -2,6 +2,7 @@
   <div>
     <SearchBar @termChange="onTermChange" />
     <VideoList />
+    {{ videos.length }}
   </div>
 </template>
 
@@ -15,7 +16,10 @@ export default {
   name: 'App',
   components: {
     SearchBar,
-    VideoList
+    VideoList,
+  },
+  data() {
+    return { videos: [] };
   },
   methods: {
     onTermChange(searchTerm) {
@@ -24,9 +28,11 @@ export default {
           key: API_KEY,
           type: 'video',
           part: 'snippet',
-          q: searchTerm
+          q: searchTerm,
         }
-      }).then(response => console.log(response));
+      }).then(response => {
+        this.videos = response.data.items;
+      });
     }
   }
 }
