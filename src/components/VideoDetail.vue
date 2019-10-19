@@ -1,5 +1,5 @@
 <template>
-  <div v-if="video">
+  <div v-if="video" class="col-md-8">
     <div class="embed-responsive embed-responsive-16by9">
       <iframe class="embed-responsive-item" :src="videoUrl" />
     </div>
@@ -30,6 +30,5 @@ export default {
     margin-top: 10px;
     padding: 10px;
     border: 1px solid black;
-    border-radius: 14px;
   }
 </style>
