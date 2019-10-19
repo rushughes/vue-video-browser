@@ -4,6 +4,7 @@
       v-for="video in videos"
       :key="video.etag"
       :video="video"
+      @videoSelect="onVideoSelect"
     />
   </ul>
 </template>
@@ -22,6 +23,12 @@ export default {
       default: function() {
         return [];
       }
+    }
+  },
+  methods: {
+    onVideoSelect(video) {
+      console.log('VideoList: ' + video);
+      this.$emit('videoSelect', video);
     }
   }
 };

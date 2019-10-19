@@ -1,26 +1,34 @@
 <template>
-  <div>
+  <div class="container">
     <SearchBar @termChange="onTermChange" />
-    <VideoList :videos="videos" />
+    <VideoDetail :video="selectedVideo" />
+    <VideoList @videoSelect="onVideoSelect" :videos="videos" />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import SearchBar from './components/SearchBar';
+import VideoDetail from './components/VideoDetail';
 import VideoList from './components/VideoList';
+
 const API_KEY = process.env.VUE_APP_API_KEY;
 
 export default {
   name: 'App',
   components: {
     SearchBar,
+    VideoDetail,
     VideoList,
   },
   data() {
-    return { videos: [] };
+    return { videos: [], selectedVideo: null };
   },
   methods: {
+    onVideoSelect(video) {
+      this.selectedVideo = video;
+      console.log('app.vue: ' + video);
+    },
     onTermChange(searchTerm) {
       axios.get('https://www.googleapis.com/youtube/v3/search', {
         params: {
